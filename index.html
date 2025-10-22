@@ -1,69 +1,105 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Alternate — playlist player</title>
-
-  <!-- Pixel-style UI + monochrome vibe -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- jsmediatags used to read ID3 tags if available (track number, title, artist). -->
-  <script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.5/dist/jsmediatags.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Public Playlists</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">ALTERNATE</div>
-    <nav>
-      <button id="btn-playlists" class="tab active">Playlists</button>
-      <button id="btn-favs" class="tab">Favorites</button>
-    </nav>
-  </header>
-
-  <main id="app">
-    <section id="playlist-grid" class="grid"></section>
-    <section id="favorites-grid" class="grid hidden"></section>
-  </main>
-
-  <!-- Fullscreen playlist overlay -->
-  <div id="overlay" class="overlay hidden" aria-hidden="true">
-    <button id="overlay-close" class="overlay-close">✕</button>
-    <div class="overlay-content">
-      <div class="cover-and-info">
-        <img id="overlay-cover" class="cover" alt="playlist cover" />
-        <div class="plist-info">
-          <h2 id="overlay-title"></h2>
-          <div id="overlay-meta" class="meta"></div>
+    <!-- Navigation Tabs -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">♫ PLAYLISTS</h1>
+            <nav class="tabs">
+                <button class="tab active" data-tab="all" data-testid="tab-all">ALL</button>
+                <button class="tab" data-tab="favorites" data-testid="tab-favorites">★ FAVS</button>
+            </nav>
         </div>
-      </div>
+    </header>
 
-      <div class="player-and-tracks">
-        <div id="player" class="player">
-          <button id="prevBtn" title="Previous">⟵</button>
-          <button id="playBtn" title="Play/Pause">▶</button>
-          <button id="nextBtn" title="Next">⟶</button>
-
-          <div class="progress-wrap">
-            <input id="progress" type="range" min="0" max="100" value="0">
-            <div class="time">
-              <span id="curTime">0:00</span> / <span id="durTime">0:00</span>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- All Playlists Grid -->
+        <div class="tab-content active" id="all-tab">
+            <div class="playlist-grid" id="playlist-grid" data-testid="playlist-grid">
+                <!-- Playlists will be dynamically loaded here -->
             </div>
-          </div>
-
-          <div class="player-controls">
-            <button id="favSongBtn" title="Favorite Song">☆</button>
-            <button id="shuffleBtn" title="Shuffle (favorites only)">⇄</button>
-          </div>
         </div>
 
-        <ol id="trackList" class="tracklist"></ol>
-      </div>
+        <!-- Favorites Grid -->
+        <div class="tab-content" id="favorites-tab">
+            <div class="playlist-grid" id="favorites-grid" data-testid="favorites-grid">
+                <!-- Favorite items will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Fullscreen Playlist View -->
+    <div class="fullscreen-overlay" id="fullscreen-overlay" data-testid="fullscreen-overlay">
+        <div class="fullscreen-content">
+            <button class="close-btn" id="close-btn" data-testid="button-close">✕</button>
+            
+            <div class="fullscreen-layout">
+                <div class="fullscreen-left">
+                    <div class="fullscreen-cover-wrapper">
+                        <img id="fullscreen-cover" src="" alt="Album Cover" class="fullscreen-cover">
+                        <button class="favorite-playlist-btn" id="favorite-playlist-btn" data-testid="button-favorite-playlist">
+                            <span class="heart">♡</span>
+                        </button>
+                    </div>
+                    <h2 class="fullscreen-title" id="fullscreen-title" data-testid="text-playlist-title"></h2>
+                </div>
+                
+                <div class="fullscreen-right">
+                    <div class="track-list" id="track-list" data-testid="track-list">
+                        <!-- Tracks will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- single audio element (managed via JS) -->
-  <audio id="audio" crossorigin="anonymous"></audio>
+    <!-- Persistent Player Controls -->
+    <div class="player-bar" id="player-bar" data-testid="player-bar">
+        <div class="player-content">
+            <div class="player-left">
+                <img id="player-cover" src="" alt="" class="player-cover">
+                <div class="player-info">
+                    <div class="player-title" id="player-title" data-testid="text-current-title">No track playing</div>
+                    <div class="player-artist" id="player-artist" data-testid="text-current-artist"></div>
+                </div>
+            </div>
+            
+            <div class="player-center">
+                <div class="player-controls">
+                    <button class="control-btn" id="prev-btn" data-testid="button-previous">◄◄</button>
+                    <button class="control-btn play-btn" id="play-btn" data-testid="button-play">►</button>
+                    <button class="control-btn" id="next-btn" data-testid="button-next">►►</button>
+                </div>
+                <div class="progress-container" id="progress-container" data-testid="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="time-display">
+                    <span id="current-time" data-testid="text-current-time">0:00</span>
+                    <span id="duration" data-testid="text-duration">0:00</span>
+                </div>
+            </div>
+            
+            <div class="player-right">
+                <button class="favorite-btn" id="favorite-track-btn" data-testid="button-favorite-track">
+                    <span class="heart">♡</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
-  <script src="script.js"></script>
+    <!-- Hidden Audio Element -->
+    <audio id="audio-player"></audio>
+
+    <script src="script.js"></script>
 </body>
 </html>
