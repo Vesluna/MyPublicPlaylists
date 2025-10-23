@@ -84,6 +84,12 @@ const PLAYLISTS = {
       title: "Silent Cleaver",
       artist: "Vesluna",
       trackNumber: 1
+     },
+      { 
+      file: "Playlists/Halloween2025/Enter the Dark.mp3",
+      title: "Enter the Dark",
+      artist: "Vesluna",
+      trackNumber: 2
      }
 
 ]
