@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Public Playlists</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Keyboard Shortcuts Hint -->
+    <div class="shortcuts-hint" id="shortcuts-hint" data-testid="shortcuts-hint">
+        <div class="shortcuts-title">KEYBOARD SHORTCUTS</div>
+        <div class="shortcuts-grid">
+            <div class="shortcut-item"><kbd>SPACE</kbd> Play/Pause</div>
+            <div class="shortcut-item"><kbd>←</kbd> Previous</div>
+            <div class="shortcut-item"><kbd>→</kbd> Next</div>
+            <div class="shortcut-item"><kbd>↑</kbd> Volume Up</div>
+            <div class="shortcut-item"><kbd>↓</kbd> Volume Down</div>
+            <div class="shortcut-item"><kbd>M</kbd> Mute</div>
+            <div class="shortcut-item"><kbd>S</kbd> Shuffle</div>
+            <div class="shortcut-item"><kbd>R</kbd> Repeat</div>
+            <div class="shortcut-item"><kbd>ESC</kbd> Close</div>
+            <div class="shortcut-item"><kbd>D</kbd> Dark Mode</div>
+            <div class="shortcut-item"><kbd>/</kbd> Search</div>
+        </div>
+        <button class="shortcuts-close" id="shortcuts-close" data-testid="button-shortcuts-close">✕</button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">♫ PLAYLISTS</h1>
+            <nav class="tabs">
+                <button class="tab active" data-tab="all" data-testid="tab-all">ALL</button>
+                <button class="tab" data-tab="favorites" data-testid="tab-favorites">★ FAVS</button>
+                <button class="tab" data-tab="recent" data-testid="tab-recent">RECENT</button>
+            </nav>
+            <div class="header-controls">
+                <div class="search-container">
+                    <input type="text" id="search-input" class="search-input" placeholder="SEARCH..." data-testid="input-search">
+                </div>
+                <select id="sort-select" class="sort-select" data-testid="select-sort">
+                    <option value="default">SORT: DEFAULT</option>
+                    <option value="name-asc">SORT: A-Z</option>
+                    <option value="name-desc">SORT: Z-A</option>
+                    <option value="tracks-asc">SORT: TRACKS ↑</option>
+                    <option value="tracks-desc">SORT: TRACKS ↓</option>
+                    <option value="recent">SORT: RECENT</option>
+                </select>
+                <button class="theme-toggle-btn" id="theme-toggle-btn" data-testid="button-theme-toggle" title="Toggle Dark Mode">◐</button>
+                <button class="settings-btn" id="settings-btn" data-testid="button-settings">⚙</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Settings Menu -->
+    <div class="settings-menu" id="settings-menu" data-testid="settings-menu">
+        <button class="settings-option" id="export-favorites" data-testid="button-export">EXPORT FAVORITES</button>
+        <button class="settings-option" id="import-favorites" data-testid="button-import">IMPORT FAVORITES</button>
+        <input type="file" id="import-file-input" accept=".json" style="display: none;">
+        <button class="settings-option" id="show-shortcuts" data-testid="button-show-shortcuts">KEYBOARD SHORTCUTS</button>
+        <div class="crossfade-control">
+            <label class="crossfade-label">CROSSFADE: <span id="crossfade-value">0</span>s</label>
+            <input type="range" id="crossfade-slider" class="crossfade-slider" min="0" max="10" value="0" step="1" data-testid="crossfade-slider">
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" data-testid="toast"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- All Playlists Grid -->
+        <div class="tab-content active" id="all-tab">
+            <div class="playlist-grid" id="playlist-grid" data-testid="playlist-grid">
+                <!-- Playlists will be dynamically loaded here -->
+            </div>
+        </div>
+
+        <!-- Favorites Grid -->
+        <div class="tab-content" id="favorites-tab">
+            <div class="playlist-grid" id="favorites-grid" data-testid="favorites-grid">
+                <!-- Favorite items will be dynamically loaded here -->
+            </div>
+        </div>
+
+        <!-- Recent Tracks Grid -->
+        <div class="tab-content" id="recent-tab">
+            <div class="recent-tracks-container">
+                <h2 class="recent-title">RECENTLY PLAYED</h2>
+                <div class="recent-tracks-grid" id="recent-tracks-grid" data-testid="recent-tracks-grid">
+                    <!-- Recent tracks will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Fullscreen Playlist View -->
+    <div class="fullscreen-overlay" id="fullscreen-overlay" data-testid="fullscreen-overlay">
+        <div class="fullscreen-content">
+            <button class="close-btn" id="close-btn" data-testid="button-close">✕</button>
+            
+            <div class="fullscreen-layout">
+                <div class="fullscreen-left">
+                    <div class="fullscreen-cover-wrapper">
+                        <img id="fullscreen-cover" src="" alt="Album Cover" class="fullscreen-cover">
+                        <button class="favorite-playlist-btn" id="favorite-playlist-btn" data-testid="button-favorite-playlist">
+                            <span class="heart">♡</span>
+                        </button>
+                    </div>
+                    <h2 class="fullscreen-title" id="fullscreen-title" data-testid="text-playlist-title"></h2>
+                    
+                    <!-- Statistics Panel -->
+                    <div class="stats-panel" id="stats-panel" data-testid="stats-panel">
+                        <div class="stat-item">
+                            <div class="stat-label">TRACKS</div>
+                            <div class="stat-value" id="stat-tracks" data-testid="stat-tracks">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">DURATION</div>
+                            <div class="stat-value" id="stat-duration" data-testid="stat-duration">0:00</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">PLAYS</div>
+                            <div class="stat-value" id="stat-plays" data-testid="stat-plays">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Playlist Customization Panel -->
+                    <div class="customization-panel">
+                        <div class="customization-title">CUSTOMIZE</div>
+                        
+                        <!-- Border Color Selector -->
+                        <div class="customization-section">
+                            <div class="customization-label">BORDER COLOR</div>
+                            <div class="color-swatches" id="color-swatches" data-testid="color-swatches">
+                                <button class="color-swatch active" data-color="#000000" data-testid="swatch-black" style="background-color: #000000; border-color: #666666;"></button>
+                                <button class="color-swatch" data-color="#333333" data-testid="swatch-dark-gray" style="background-color: #333333; border-color: #666666;"></button>
+                                <button class="color-swatch" data-color="#666666" data-testid="swatch-gray" style="background-color: #666666; border-color: #999999;"></button>
+                                <button class="color-swatch" data-color="#999999" data-testid="swatch-light-gray" style="background-color: #999999; border-color: #CCCCCC;"></button>
+                                <button class="color-swatch" data-color="#CCCCCC" data-testid="swatch-very-light-gray" style="background-color: #CCCCCC; border-color: #999999;"></button>
+                                <button class="color-swatch" data-color="#FFFFFF" data-testid="swatch-white" style="background-color: #FFFFFF; border-color: #000000;"></button>
+                            </div>
+                        </div>
+
+                        <!-- Border Style Selector -->
+                        <div class="customization-section">
+                            <div class="customization-label">BORDER STYLE</div>
+                            <div class="style-buttons" id="style-buttons" data-testid="style-buttons">
+                                <button class="style-btn active" data-style="solid" data-testid="style-solid">━━━</button>
+                                <button class="style-btn" data-style="dashed" data-testid="style-dashed">┉┉┉</button>
+                                <button class="style-btn" data-style="dotted" data-testid="style-dotted">┈┈┈</button>
+                                <button class="style-btn" data-style="double" data-testid="style-double">═══</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Playlist Notes -->
+                    <div class="notes-panel">
+                        <div class="notes-title">NOTES</div>
+                        <textarea id="playlist-notes" class="playlist-notes" placeholder="Add notes about this playlist..." data-testid="textarea-notes"></textarea>
+                        <button class="notes-save-btn" id="notes-save-btn" data-testid="button-save-notes">SAVE NOTES</button>
+                    </div>
+                </div>
+                
+                <div class="fullscreen-right">
+                    <div class="track-list" id="track-list" data-testid="track-list">
+                        <!-- Tracks will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Persistent Player Controls -->
+    <div class="player-bar" id="player-bar" data-testid="player-bar">
+        <div class="player-content">
+            <div class="player-left">
+                <!-- Visual Equalizer -->
+                <div class="equalizer" id="equalizer" data-testid="equalizer">
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                </div>
+                
+                <img id="player-cover" src="" alt="" class="player-cover">
+                <div class="player-info">
+                    <div class="player-title" id="player-title" data-testid="text-current-title">No track playing</div>
+                    <div class="player-artist" id="player-artist" data-testid="text-current-artist"></div>
+                </div>
+            </div>
+            
+            <div class="player-center">
+                <div class="player-controls">
+                    <button class="control-btn" id="shuffle-btn" data-testid="button-shuffle" title="Shuffle (S)">⤬</button>
+                    <button class="control-btn" id="prev-btn" data-testid="button-previous" title="Previous (←)">◄◄</button>
+                    <button class="control-btn play-btn" id="play-btn" data-testid="button-play" title="Play/Pause (Space)">►</button>
+                    <button class="control-btn" id="next-btn" data-testid="button-next" title="Next (→)">►►</button>
+                    <button class="control-btn" id="repeat-btn" data-testid="button-repeat" title="Repeat (R)">↻</button>
+                </div>
+                <div class="progress-container" id="progress-container" data-testid="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <div class="progress-hover-indicator" id="progress-hover-indicator"></div>
+                    <div class="progress-tooltip" id="progress-tooltip" data-testid="progress-tooltip">0:00</div>
+                </div>
+                <div class="time-display">
+                    <span id="current-time" data-testid="text-current-time">0:00</span>
+                    <span id="duration" data-testid="text-duration">0:00</span>
+                </div>
+            </div>
+            
+            <div class="player-right">
+                <button class="favorite-btn" id="favorite-track-btn" data-testid="button-favorite-track" title="Favorite">
+                    <span class="heart">♡</span>
+                </button>
+                
+                <!-- Volume Control -->
+                <div class="volume-control">
+                    <button class="volume-btn" id="volume-btn" data-testid="button-volume" title="Mute (M)">
+                        <span class="volume-icon" id="volume-icon">))))</span>
+                    </button>
+                    <div class="volume-slider-container">
+                        <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="100" data-testid="volume-slider" title="Volume">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Audio Elements for Crossfade -->
+    <audio id="audio-player"></audio>
+    <audio id="audio-player-2"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
