@@ -36,7 +36,13 @@ const PLAYLISTS = {
                  title: "-... .-.. . ... ... .. -. --.",
                  artist: "Vesluna",
                  trackNumber: 5
-             }
+             },
+            {
+                 file:"Playlists/Alternate/Stargaze.mp3",
+                 title: "Stargaze",
+                 artist: "Vesluna",
+                 trackNumber: 6
+             },
         ]
     },
      Roses: {
