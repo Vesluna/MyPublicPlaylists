@@ -43,6 +43,18 @@ const PLAYLISTS = {
                  artist: "Vesluna",
                  trackNumber: 6
              },
+            {
+                 file:"Playlists/Alternate/The Lab.mp3",
+                 title: "The Lab",
+                 artist: "Vesluna",
+                 trackNumber: 7
+             },
+            {
+                 file:"Playlists/Alternate/The-Lab_Entity-Encounter.mp3",
+                 title: "The Lab: Entity Encounter",
+                 artist: "Vesluna",
+                 trackNumber: 8
+             },
         ]
     },
      Roses: {
