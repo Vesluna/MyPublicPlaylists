@@ -93,7 +93,122 @@ const PLAYLISTS = {
      }
 
 ]
- }  // Duplicate from selecting from here
+},
+    StarsAndColors: {
+    name: "Stars And Colors",
+    coverArt: "Playlists/Stars And Colors/cover.png",
+    tracks: [
+        { 
+            file: "Playlists/Stars And Colors/LET ME FIX YOU.mp3",
+            title: "LET ME FIX YOU",
+            artist: "Vesluna",
+            trackNumber: 1,
+            lyrics: `[Verse 1]
+You… ve… found… yourself…
+Drowning in your own variety.
+The colors fade and melt away,
+Leaving shades you swore you’d never be.
+
+[Verse 2]
+The mirror blinks, your face divides,
+Each fragment whispers “choose your side.”
+But every mask feels paper-thin,
+And every truth won’t let you in.
+
+[Verse 2-1]
+(You tried to hide the shifting lines,)
+(But light bleeds through the veil this time.)
+The more you fight, the less you know,
+The current pulls, the undertow.
+
+[Verse 2-3]
+You built your walls of sound and hue,
+A perfect cage designed by you.
+(But silence cracks the painted stone,)
+And now you’re left here all alone.
+
+[Pre-Chorus]
+Is it me, or just the echo I became?
+Am I hollow, or reborn in all this pain?
+The noise grows louder, calling my name—
+(And I can’t tell if I’m still sane...)
+
+[Chorus 1]
+You can’t fix the sky by breaking stars.
+You can’t find yourself by wearing scars.
+(But still you reach, still you fall,)
+Chasing shadows on the wall.
+
+[Bridge]
+Every version screams in static light,
+Every heartbeat out of sight.
+You tried to save the one you knew—
+But they’re saving you from you.
+
+[Verse 3]
+Now your heart rewinds the reel,
+Memories you shouldn’t feel.
+The silence now becomes the tune,
+A quiet storm inside the room.
+
+[Verse 4]
+(You whisper to the cracks in glass,)
+(A promise that you’ll make it last.)
+But every vow just fades in two—
+What’s left to prove when all is through?
+
+[Pre-Chorus]
+(And the echo says my name again...)
+(It’s softer now, but not the same.)
+The calm before the iron sound,
+The moment where I break down—
+
+[Verse 5]
+I see the hands that pull me near,
+I see the ghosts of every fear.
+They smile and say it’s overdue,
+And then I hear the truth—
+
+[Chorus 2 – Intense metal, battle area]
+SO LET ME FIX YOU! (LET THEM FIX YOU!)
+You’ve burned the bridge, now swim through flame!
+LET ME FIX YOU! (LET THEM FIX YOU!)
+The light inside will scream your name!
+Break your code, erase the view,
+You’ll be perfect when we’re through!
+
+[Verse 6]
+Smoke and color twist and bleed,
+All you are, and all you need.
+You fall apart to realign,
+A shattered soul by design.
+
+[Verse 7]
+(And maybe that’s the plan all along...)
+(To break you down until you’re strong...)
+The echoes fade, replaced by hue—
+The final shade becomes the true.
+
+[Final Chorus]
+You can’t fix the sky by breaking stars—
+But maybe healing starts with scars.
+(Still I reach, still I fall,)
+Still I answer to the call.
+SO LET ME FIX YOU! (LET THEM FIX YOU!)
+Till the silence sings anew—
+And I find me inside of you.
+
+[Short - Verse 8]
+The current calms, the color stays.
+You breathe again… in different ways.
+
+[End]
+(...You found yourself.)`,
+            notes: "One Of My Personal Favorites"
+        }
+    ]
+}
+
 };
 // ============================================
 
