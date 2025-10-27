@@ -114,7 +114,8 @@ const PLAYLISTS = {
       notes: "",
       trackNumber: 1
      },
-},
+  ]
+     },         
     StarsAndColors: {
     name: "Stars And Colors",
     coverArt: "Playlists/Stars And Colors/cover.png",
