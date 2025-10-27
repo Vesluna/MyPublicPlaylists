@@ -113,7 +113,7 @@ const PLAYLISTS = {
       lyrics: "",
       notes: "",
       trackNumber: 1
-     },
+     }
   ]
      },         
     StarsAndColors: {
