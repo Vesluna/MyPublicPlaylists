@@ -107,12 +107,12 @@ const PLAYLISTS = {
       trackNumber: 1
      },
       { 
-      file: "Playlists/SoulTraits/Trait-Kindness.mp3",
+      file: "Playlists/SoulTraits/True-Colors.mp3",
       title: "Trait: Kindness",
       artist: "Vesluna",
       lyrics: "",
       notes: "",
-      trackNumber: 1
+      trackNumber: 2  // Fixed duplicate trackNumber
      }
   ]
      },         
@@ -715,8 +715,14 @@ function createPlaylistCard(id, playlist) {
 function openPlaylist(id, playlist) {
     currentPlaylist = { id, ...playlist };
     
-    // Sort tracks by track number
-    currentPlaylist.tracks.sort((a, b) => a.trackNumber - b.trackNumber);
+    // Clone and sort tracks to avoid mutating original
+    currentPlaylist.tracks = [...playlist.tracks].sort((a, b) => a.trackNumber - b.trackNumber);
+    
+    currentTrackIndex = 0; // Reset index on new playlist
+    
+    if (isShuffle) {
+        createShuffleOrder();
+    }
     
     fullscreenTitle.textContent = playlist.name;
     fullscreenCover.src = playlist.coverArt;
@@ -762,9 +768,6 @@ function renderTrackList() {
     currentPlaylist.tracks.forEach((track, index) => {
         const trackItem = document.createElement('div');
         trackItem.className = 'track-item';
-        if (index === currentTrackIndex && currentPlaylist) {
-            trackItem.classList.add('active');
-        }
         trackItem.dataset.testid = `track-item-${index}`;
         
         trackItem.innerHTML = `
@@ -784,6 +787,8 @@ function renderTrackList() {
         
         trackList.appendChild(trackItem);
     });
+    
+    updateActiveTrack();
 }
 
 // Create shuffled order
@@ -865,7 +870,7 @@ function togglePlay() {
         const firstPlaylistId = Object.keys(PLAYLISTS)[0];
         if (firstPlaylistId) {
             currentPlaylist = { id: firstPlaylistId, ...PLAYLISTS[firstPlaylistId] };
-            currentPlaylist.tracks.sort((a, b) => a.trackNumber - b.trackNumber);
+            currentPlaylist.tracks = [...PLAYLISTS[firstPlaylistId].tracks].sort((a, b) => a.trackNumber - b.trackNumber);
             currentTrackIndex = 0;
             if (isShuffle) createShuffleOrder();
             loadTrack();
@@ -887,7 +892,12 @@ function toggleShuffle() {
     
     if (isShuffle) {
         shuffleBtn.classList.add('active');
-        createShuffleOrder();
+        if (currentPlaylist) {
+            createShuffleOrder();
+            currentTrackIndex = 0; // Start fresh shuffle
+            loadTrack();
+            if (isPlaying) playTrack();
+        }
         showToast('SHUFFLE ON');
     } else {
         shuffleBtn.classList.remove('active');
@@ -1027,14 +1037,12 @@ function crossfadeToNextTrack() {
 // Update active track highlighting
 function updateActiveTrack() {
     const trackItems = trackList.querySelectorAll('.track-item');
+    if (trackItems.length === 0) return;
+    
     const actualIndex = getActualIndex(currentTrackIndex);
     
-    trackItems.forEach((item, index) => {
-        if (index === actualIndex) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
-        }
+    trackItems.forEach((item, idx) => {
+        item.classList.toggle('active', idx === actualIndex);
     });
 }
 
@@ -1194,7 +1202,7 @@ function createTrackCard(favTrack, playlist) {
     
     card.addEventListener('click', () => {
         currentPlaylist = { id: favTrack.playlistId, ...playlist };
-        currentPlaylist.tracks.sort((a, b) => a.trackNumber - b.trackNumber);
+        currentPlaylist.tracks = [...playlist.tracks].sort((a, b) => a.trackNumber - b.trackNumber);
         currentTrackIndex = favTrack.trackIndex;
         if (isShuffle) createShuffleOrder();
         loadTrack();
@@ -1223,7 +1231,7 @@ function createRecentTrackCard(recentTrack, playlist) {
     
     card.addEventListener('click', () => {
         currentPlaylist = { id: recentTrack.playlistId, ...playlist };
-        currentPlaylist.tracks.sort((a, b) => a.trackNumber - b.trackNumber);
+        currentPlaylist.tracks = [...playlist.tracks].sort((a, b) => a.trackNumber - b.trackNumber);
         currentTrackIndex = recentTrack.trackIndex;
         if (isShuffle) createShuffleOrder();
         loadTrack();
