@@ -93,6 +93,27 @@ const PLAYLISTS = {
      }
 
 ]
+ },
+     SoulTraits: {
+     name: "SoulTraits",
+     coverArt: "Playlists/SoulTraits/cover.png",
+     tracks: [
+      { 
+      file: "Playlists/SoulTraits/Green and Violet.mp3",
+      title: "Green and Violet",
+      artist: "Vesluna",
+      lyrics: "",
+      notes: "",
+      trackNumber: 1
+     },
+      { 
+      file: "Playlists/SoulTraits/Trait-Kindness.mp3",
+      title: "Trait: Kindness",
+      artist: "Vesluna",
+      lyrics: "",
+      notes: "",
+      trackNumber: 1
+     },
 },
     StarsAndColors: {
     name: "Stars And Colors",
