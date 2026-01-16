@@ -229,7 +229,119 @@ You breathe again… in different ways.
             notes: "One Of My Personal Favorites"
         }
     ]
-}
+},
+     HAUNTED: {
+     name: "HAUNTED",
+     coverArt: "Playlists/HAUNTED/cover.png",
+     tracks: [
+      { 
+      file: "Playlists/HAUNTED/HAUNTED.mp3",
+      title: "HAUNTED",
+      artist: "Vesluna",
+      trackNumber: 1,
+      lyrics: `[Pre-Intro - Instrumental]
+(Very slow piano chords, 1 beat ≈ 6 seconds – super eerie tension build)
+(Piano slowly morphs into shimmering electric piano/synth)
+(A-Ah…!)
+
+[Intro – Instrumental]
+(Drums slam in hard – fast kick + snare, main synth chorus melody blasts)
+(H-Haunt-ed… H-Haunt-ed…)
+
+[Verse 1]
+Shadows crawl across my skin at 3AM
+Whispers calling out my name again
+Every creak is like a warning sign
+But I’m too tired to run this time
+
+[Verse 2]
+Mirror shows a face that isn’t mine
+Eyes too wide, like they’re losing time
+Heartbeat racing, but the silence screams
+Trapped inside my own bad dreams
+
+[Pre-Chorus]
+Can you feel it? (feel it)
+Coming closer now…
+Can you hear it? (hear it)
+It’s breathing down—
+
+[Chorus]
+HAUNTED — everything’s so TAUNTED
+Feeling like I’m caught inside a dream
+TAUNTED — ye-yeah my mind is WANTED
+By the thoughts that won’t let go of me
+
+HAUNTED — everything’s so FRIGHTENING
+Empty eyes staring all across my room
+TAUNTED — yeah it feels so TIGHTENING
+Like the walls are breathing when I move
+
+[Instrumental Break – Chorus Remix'd]
+(Faster synth arpeggios, chopped vocal echoes: "Haunt-ed… haunt-ed…", reversed whispers, rising tension build)
+
+[Pause]
+(Sudden full stop – just faint heartbeat + breathing SFX for 2–3 seconds)
+
+[Verse 3]
+Fingers tapping on the glass outside
+No one’s there… but I still hide
+Memories replay like broken tape
+Pulling me into the same escape
+
+[Verse 4]
+Every light flickers, then it dies
+Cold breath fogging up my eyes
+Something’s watching, never blinks
+Pushing me right to the brink
+
+[Pre-Chorus]
+Can you see it? (see it)
+Right behind your back…
+Can you feel it? (feel it)
+The air is turning black—
+
+[Short Verse 5]
+No escape… no way out…
+(haunted… haunted…)
+
+[Bridge]
+(Slower breakdown, pitched-down vocal layer for contrast – creepy effect)
+I’m screaming but the sound won’t leave
+These chains are made of what I believe
+You can’t run from what’s inside your head
+The ghost is me… the ghost is—
+
+[Chorus]
+HAUNTED — everything’s so TAUNTED
+Feeling like I’m caught inside a dream
+TAUNTED — ye-yeah my mind is WANTED
+By the thoughts that won’t let go of me
+
+HAUNTED — everything’s so FRIGHTENING
+Empty eyes staring all across my room
+TAUNTED — yeah it feels so TIGHTENING
+Like the walls are breathing when I move
+
+[Instrumental Area – Interrupted]
+(Build-up gets cut off suddenly with glitch/stutter effects)
+
+[Final Chorus – Second Remix]
+(Even faster, layered vocals, double-time drums, maximum energy)
+HAUNTED — everything’s so TAUNTED
+TAUNTED — yeah my mind is WANTED
+HAUNTED — everything’s so FRIGHTENING
+TAUNTED — walls are breathing, can’t break free!
+
+[Final Verse / Outro]
+Pretty sure I’m haunted…
+(echo: Haunted… haunted… haun—)
+
+(haunted.)
+(last faint whisper + final piano chord fade into static/heartbeat)`
+     }
+   ]
+},
 
 };
 // ============================================
